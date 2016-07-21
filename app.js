@@ -1,13 +1,13 @@
-#!/usr/bin/env electron
-
-var app = require('app')
-var BrowserWindow = require('browser-window')
+var electron = require('electron')
+var app = electron.app
+var BrowserWindow = electron.BrowserWindow
+var ipc = electron.ipcMain
+var dialog = electron.dialog
+var powerSaveBlocker = electron.powerSaveBlocker
+var globalShortcut = electron.globalShortcut
 var path = require('path')
-var ipc = require('electron').ipcMain
-var dialog = require('dialog')
 var shell = require('shell')
-var powerSaveBlocker = require('electron').powerSaveBlocker
-var globalShortcut = require('electron').globalShortcut
+
 
 var win
 var link
@@ -26,6 +26,7 @@ var onopen = function (e, lnk) {
 
 app.on('open-file', onopen)
 app.on('open-url', onopen)
+console.log(process.version)
 
 var frame = process.platform === 'win32'
 
