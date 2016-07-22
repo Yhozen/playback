@@ -13,22 +13,22 @@ var win
 var link
 var ready = false
 
-var onopen = function (e, lnk) {
-  e.preventDefault()
-
-  if (ready) {
-    win.send('add-to-playlist', [].concat(lnk))
-    return
-  }
-
-  link = lnk
-}
-
-app.on('open-file', onopen)
-app.on('open-url', onopen)
+// TODO: Implement this code later (macOS only)
+// var onopen = function (e, lnk) {
+//   e.preventDefault()
+//
+//   if (ready) {
+//     win.send('add-to-playlist', [].concat(lnk))
+//     return
+//   }
+//
+//   link = lnk
+// }
+// app.on('open-file', onopen)
+// app.on('open-url', onopen)
 console.log(process.version)
 
-var frame = process.platform === 'win32'
+var frame = (process.platform === 'win32')
 
 app.on('ready', function () {
   win = new BrowserWindow({
@@ -37,10 +37,13 @@ app.on('ready', function () {
     height: 470,
     frame: frame,
     show: false,
-    transparent: true
+    transparent: true,
+    backgroundColor: '#000000'
   })
 
-  win.loadURL('file://' + path.join(__dirname, 'index.html#' + JSON.stringify(process.argv.slice(2))))
+  // win.loadURL('file://' + path.join(__dirname, 'player.html#' + JSON.stringify(process.argv.slice(2))))
+  win.loadURL( 'file://' + path.join( __dirname, 'main.html' ) )
+  win.openDevTools()
 
   ipc.on('close', function () {
     app.quit()
