@@ -19,7 +19,6 @@ titlebar.on('fullscreen', function () {
   ipc.send('maximize')
 })
 
-
 //FETCH DATA
 const REQUEST_URL = 'http://192.168.1.33:5000/movies/1'
 
@@ -29,15 +28,23 @@ fetch(REQUEST_URL)
     var filtered = responseData.filter(isEnglish)
     return filtered
   })
-  .then((filtered) => filtered.map(printTorrent))
+  .then((filtered) => filtered.map(startTorrent))
+  .catch((err) => console.error("THERE WAS AN ERROR:" + err))
 
+//FUNCTIONS
 function isEnglish (movie) {
-   return (movie.torrents.en)
+  return (movie.torrents.en)
 }
-function printTorrent (movie) {
-  var oImg=document.createElement("img");
-  oImg.setAttribute('src', movie.images.banner);
+
+function startTorrent (movie) {
+  var oImg=document.createElement("img")
+  oImg.setAttribute('src', movie.images.banner)
   document.getElementById("container").appendChild(oImg)
+  oImg.addEventListener("click", function () {
+    var magnetURI = movie.torrents.en['720p'].url
+    ipc.send('player', magnetURI.toString())
+    alert(magnetURI)
+  })
 }
 
 //SHOW APP

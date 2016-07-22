@@ -40,10 +40,23 @@ app.on('ready', function () {
     transparent: true,
     backgroundColor: '#000000'
   })
-
-  // win.loadURL('file://' + path.join(__dirname, 'player.html#' + JSON.stringify(process.argv.slice(2))))
+  // win = new BrowserWindow({
+  //   title: 'playback',
+  //   width: 860,
+  //   height: 470,
+  //   frame: frame,
+  //   show: false,
+  //   transparent: true,
+  //   backgroundColor: '#000000',
+  //   parent: main,
+  //   })
+  ipc.on('player', function (event, arg) {
+    win.loadURL( 'file://' + path.join( __dirname, 'player.html#' + '["' + arg + '"]' ) )
+  })
   win.loadURL( 'file://' + path.join( __dirname, 'main.html' ) )
+  // win.loadURL( 'file://' + path.join( __dirname, 'player.html#' + '["magnet:?xt=urn:btih:0BBCA7584749D4E741747E32E6EB588AEA03E40F&tr=udp://glotorrents.pw:6969/announce&tr=udp://tracker.opentrackr.org:1337/announce&tr=udp://torrent.gresille.org:80/announce&tr=udp://tracker.openbittorrent.com:80&tr=udp://tracker.coppersurfer.tk:6969&tr=udp://tracker.leechers-paradise.org:6969&tr=udp://p4p.arenabg.ch:1337&tr=udp://tracker.internetwarriors.net:1337"]'  ) ) //JSON.stringify(process.argv.slice(2))
   win.openDevTools()
+
 
   ipc.on('close', function () {
     app.quit()
