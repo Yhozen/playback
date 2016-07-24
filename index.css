@@ -408,3 +408,10 @@ body:hover #overlay, body:hover .titlebar {
   float: left;
   margin-left: 20px;
 }
+
+.titletop {
+  color: white;
+  text-align: center;
+  padding-top: 5px;
+  font-weight: 700;
+}

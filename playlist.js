@@ -10,6 +10,15 @@ var concat = require('concat-stream')
 
 var noop = function () {}
 
+var createTitleDiv = function (text) {
+  var titlebarElement = document.getElementsByClassName("titlebar webkit-draggable")[0]
+  var newDiv = document.createElement('div')
+  newDiv.setAttribute('class', 'titletop')
+  var newContent = document.createTextNode(text)
+  newDiv.appendChild(newContent)
+  titlebarElement.appendChild(newDiv)
+}
+
 module.exports = function () {
   var that = new events.EventEmitter()
 
@@ -17,6 +26,7 @@ module.exports = function () {
 
   var onmagnet = function (link, cb) {
     console.log('torrent ' + link)
+    createTitleDiv('Hello idiots!')
 
     var engine = torrents()
     var subtitles = {}
@@ -48,9 +58,13 @@ module.exports = function () {
         }
       })
 
-      setInterval(function () {
-        console.log(torrent.downloadSpeed() + ' (' + torrent.swarm.wires.length + ')')
-      }, 1000)
+      function progressTorrent () {
+        var speedProgress = Math.round(torrent.downloadSpeed() / 1000) + ' kBits/sec ' + round((torrent.progress * 100), 2) + '% downloaded' // ' (' + torrent.swarm.wires.length + ')'
+        var titleDOM = document.getElementById('controls-name')
+        titleDOM.innerHTML = speedProgress
+      }
+
+      setInterval(progressTorrent, 1000)
 
       that.emit('update')
       cb()
@@ -290,4 +304,8 @@ module.exports = function () {
   }
 
   return that
+}
+
+function round (value, decimals) {
+  return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals)
 }

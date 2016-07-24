@@ -305,7 +305,8 @@ $(document).on('keydown', function (e) {
 mouseidle($('#idle')[0], 3000, 'hide-cursor')
 
 list.on('select', function () {
-  $('#controls-name')[0].innerText = list.selected.name
+  //$('#controls-name')[0].innerText = list.selected.name
+  $('.titletop')[0].innerText = list.selected.name
   media.play('http://127.0.0.1:' + server.address().port + '/' + list.selected.id)
   if (list.selected.subtitles) onsubs(list.selected.subtitles)
   updatePlaylist()
@@ -434,7 +435,7 @@ $('#popup').on('transitionend', function () {
 })
 
 titlebar.on('close', function () {
-  ipc.send('close')
+  ipc.send('closePlayer')
 })
 
 titlebar.on('minimize', function () {
