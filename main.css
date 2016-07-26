@@ -33,7 +33,6 @@ body, html {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    align-items: flex-start;
 }
 
 #spacer {
@@ -44,9 +43,17 @@ img.responsive {
   width: 100%;
   height: auto;
 }
+
 .movie-flex {
   width: 160;
   margin-bottom: 10px;
+}
+
+.error-div {
+  font-size: 35px;
+  margin-top: 200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Let's get this party started */
