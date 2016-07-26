@@ -24,10 +24,14 @@ fetch(REQUEST_URL)
 var isEnglish = (movie) => movie.torrents.en
 
 var startTorrent = (movie) => {
+  var movieDiv = document.createElement('div')
   var movieImg = document.createElement("img")
-  movieImg.setAttribute('src', movie.images.banner)
-  movieImg.addEventListener("click", () => ipc.send('player', movie.torrents.en['720p'].url))
-  document.getElementById("container").appendChild(movieImg)
+  movieImg.setAttribute('src', movie.images.poster)
+  movieImg.setAttribute('class', 'responsive')
+  movieDiv.appendChild(movieImg)
+  movieDiv.setAttribute('class', 'movie-flex')
+  movieDiv.addEventListener("click", () => ipc.send('player', movie.torrents.en['720p'].url))
+  document.getElementById("container").appendChild(movieDiv)
 }
 
 //SHOW APP

@@ -26,7 +26,7 @@ module.exports = function () {
 
   var onmagnet = function (link, cb) {
     console.log('torrent ' + link)
-    createTitleDiv('Hello idiots!')
+    createTitleDiv('Loading metadata')
 
     var engine = torrents()
     var subtitles = {}
