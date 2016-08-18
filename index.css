@@ -46,7 +46,7 @@ body, html {
 #overlay {
   opacity: 0;
   z-index: 10;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -407,4 +407,11 @@ body:hover #overlay, body:hover .titlebar {
 #controls-name {
   float: left;
   margin-left: 20px;
+}
+
+.titletop {
+  color: white;
+  text-align: center;
+  padding-top: 5px;
+  font-weight: 700;
 }
